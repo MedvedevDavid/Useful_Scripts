@@ -1,4 +1,4 @@
-'''The File is including the necesarry implementation to fearch
+'''The File is including the necesarry implementation to search
 specific text or number after a defined text'''
 class TextNumberSearcher:
     '''The class is to search numbers after specific texts'''
