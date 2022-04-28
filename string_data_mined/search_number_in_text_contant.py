@@ -50,8 +50,11 @@ class TextNumberSearcher:
         number_with_separators=line_of_string.split(self._text_to_be_find, 1)[1]
         number_array_with_comas = number_with_separators.split(self._separators, 1)
         counts = number_array_with_comas[0]
-        self._count_of_element += int((self._number_system + counts),0)
-        self._element_list.append(int((self._number_system + counts),0))
+        try:
+            self._count_of_element += int((self._number_system + counts),0)
+            self._element_list.append(int((self._number_system + counts),0))
+        except ValueError:   
+            pass #print("Not a number") 
         if len(number_array_with_comas)>1:
             self._count_more_than_one_decimals(number_array_with_comas)
 
@@ -62,9 +65,11 @@ class TextNumberSearcher:
         if self._separators in elements_to_be_splitt:
             self._count_of_element += self._splitt_add_append(elements_to_be_splitt, self._separators)
         else:
-            self._count_of_element += int(elements_to_be_splitt,0)
-            self._element_list.append( int(elements_to_be_splitt,0))
-
+            try:
+                self._count_of_element += int(elements_to_be_splitt,0)
+                self._element_list.append( int(elements_to_be_splitt,0))
+            except ValueError:   
+                pass #print("Not a number") 
     def _count_non_decimals(self, line_of_string):
         '''Count sum of none decimals and create the array of decimals'''
         line_of_string = line_of_string.replace(self._separators, "")
@@ -72,9 +77,11 @@ class TextNumberSearcher:
         if self._number_system in counts:
             self._count_of_element += (self._splitt_add_append(counts, self._number_system))
         else:
-            self._count_of_element += int((self._number_system + counts),0)
-            self._element_list.append( int((self._number_system + counts),0))
-
+            try:
+                self._count_of_element += int((self._number_system + counts),0)
+                self._element_list.append( int((self._number_system + counts),0))
+            except ValueError:   
+                pass #print("Not a number") 
     def _changecapital_number_system_identifier(self, line_of_string):
         line_of_string = line_of_string.replace("X", "x")
         return line_of_string
@@ -83,12 +90,18 @@ class TextNumberSearcher:
         '''Recursive function which is counting and
         separating until the end of the input string'''
         counts=input_text.split(splitt_base, 1)
-        retval = int((self._number_system + counts[0]),0)
-        self._element_list.append(int((self._number_system + counts[0]),0))
+        try:
+            retval = int((self._number_system + counts[0]),0)
+            self._element_list.append(int((self._number_system + counts[0]),0))
+        except ValueError:   
+            pass #print("Not a number") 
         if splitt_base in counts[1]:
             retval += (self._splitt_add_append(counts[1],splitt_base))
             self._element_list.append(self._splitt_add_append(counts[1], splitt_base))
         else:
-            retval += int((self._number_system + counts[1]),0)
-            self._element_list.append( int((self._number_system + counts[1]),0))
+            try:
+                retval += int((self._number_system + counts[1]),0)
+                self._element_list.append( int((self._number_system + counts[1]),0))
+            except ValueError:   
+                pass #print("Not a number") 
         return retval
