@@ -51,8 +51,12 @@ class TextNumberSearcher:
         number_array_with_comas = number_with_separators.split(self._separators, 1)
         counts = number_array_with_comas[0]
         try:
-            self._count_of_element += int((self._number_system + counts),0)
-            self._element_list.append(int((self._number_system + counts),0))
+            if "." in counts:
+                self._count_of_element += float((self._number_system + counts))
+                self._element_list.append(float((self._number_system + counts)))
+            else:
+                self._count_of_element += int((self._number_system + counts),0)
+                self._element_list.append(int((self._number_system + counts),0))
         except ValueError:   
             pass #print("Not a number") 
         if len(number_array_with_comas)>1:
